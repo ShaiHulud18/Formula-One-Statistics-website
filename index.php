@@ -1,5 +1,5 @@
 <?php
-$serverName = "f1sqlserver.f1db.windows.net";
+$serverName = "f1sqlserver.database.windows.net";
 $connectionOptions = array(
     "Database" => "f1db",
     "Uid" => "ashish",
