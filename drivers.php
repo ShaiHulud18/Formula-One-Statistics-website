@@ -137,47 +137,46 @@
 	</form>
 	<?php
 	$serverName = "f1sqlserver.database.windows.net";
-    			$connectionOptions = array(
-        		"Database" => "f1db",
-        		"Uid" => "ashish",
-        		"PWD" => "Kstc@1234"
-    			);
+	$connectionOptions = array(
+		"Database" => "f1db",
+		"Uid" => "ashish",
+		"PWD" => "Kstc@1234"
+	);
 
-    			$conn = sqlsrv_connect($serverName, $connectionOptions);
+	$conn = sqlsrv_connect($serverName, $connectionOptions);
 
-   
-    			if (!$conn) {
-        		die("Connection failed1: " . print_r(sqlsrv_errors(), true));
-    			}
+	if (!$conn) {
+		die("Connection failed1: " . print_r(sqlsrv_errors(), true));
+	}
 
-		
-		if (isset($_POST['submit'])) {
-			$driver = $_POST['driver'];
-			
-			if (!empty($driver)) {
-				$sql = "SELECT * FROM [dbo].[driver_page_table] WHERE name='$driver'";
-				$result = mysqli_query($conn, $sql);
-				
-				if (mysqli_num_rows($result) > 0) {
-					echo "<table>";
-					echo "<tr><th>Driver Name</th><th>DOB</th><th>Driver Code</th><th>Nationality</th></tr>";
-					
-					while($row = mysqli_fetch_assoc($result)) {
-						echo "<tr><td>".$row["driverName"]."</td><td>".$row["dob"]."</td><td>".$row["code"]."</td><td>".$row["nationality"]."</td></tr>";
-					}
-					
-					echo "</table>";
-				} else {
-					echo "No driver details found for ".$driver;
+	if (isset($_POST['submit'])) {
+		$driver = $_POST['driver'];
+
+		if (!empty($driver)) {
+			$sql = "SELECT * FROM [dbo].[driver_page_table] WHERE name='$driver'";
+			$result = sqlsrv_query($conn, $sql);
+
+			if (sqlsrv_has_rows($result)) {
+				echo "<table>";
+				echo "<tr><th>Driver Name</th><th>DOB</th><th>Driver Code</th><th>Nationality</th></tr>";
+
+				while($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+					echo "<tr><td>".$row["driverName"]."</td><td>".$row["dob"]."</td><td>".$row["code"]."</td><td>".$row["nationality"]."</td></tr>";
 				}
+
+				echo "</table>";
 			} else {
-				echo "Please select a driver";
+				echo "No driver details found for ".$driver;
 			}
+		} else {
+			echo "Please select a driver";
 		}
-		
-		
-		mysqli_close($conn);
-	?>
+	}
+
+	sqlsrv_free_stmt($result);
+	sqlsrv_close($conn);
+?>
+
 	
 </body>
 </html>
