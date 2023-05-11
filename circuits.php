@@ -184,32 +184,35 @@
 
 	
 	if (isset($_POST['search'])) {
-		$circuit = $_POST['circuits'];
-		$query = "SELECT * FROM dbo.circuits_page_table WHERE name='$circuitName'";
-		$result = mysqli_query($conn, $query);
+    $circuit = $_POST['circuits'];
+    $query = "SELECT * FROM dbo.circuits_page_table WHERE name='$circuitName'";
+    $result = sqlsrv_query($conn, $query);
+    if ($result === false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
 
-		if (mysqli_num_rows($result) > 0) {
-			echo '<table>';
-			echo '<tr><th>Circuit Name</th><th>Location</th><th>Country</th><th>Fastest Lap</th><th>Driver Name</th><th>Race Year</th></tr>';
-			while ($row = mysqli_fetch_assoc($result)) {
-				echo '<tr>';
-				echo '<td>' . $row['circuitName'] . '</td>';
-				echo '<td>' . $row['location'] . '</td>';
-				echo '<td>' . $row['country'] . '</td>';
-				echo '<td>' . $row['time'] . '</td>';
-				echo '<td>' . $row['driverName'] . '</td>';
-				echo '<td>' . $row['raceYear'] . '</td>';
-				echo '</tr>';
-			}
-			echo '</table>';
-		} else {
-			echo 'No circuits found.';
-		}
-	}
-	mysqli_close($conn);
-	
+    if (sqlsrv_has_rows($result)) {
+        echo '<table>';
+        echo '<tr><th>Circuit Name</th><th>Location</th><th>Country</th><th>Fastest Lap</th><th>Driver Name</th><th>Race Year</th></tr>';
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            echo '<tr>';
+            echo '<td>' . $row['circuitName'] . '</td>';
+            echo '<td>' . $row['location'] . '</td>';
+            echo '<td>' . $row['country'] . '</td>';
+            echo '<td>' . $row['time'] . '</td>';
+            echo '<td>' . $row['driverName'] . '</td>';
+            echo '<td>' . $row['raceYear'] . '</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+    } else {
+        echo 'No circuits found.';
+    }
+
+    sqlsrv_free_stmt($result);
+}
+sqlsrv_close($conn);
 	?>
-		
 	<script>
 		 searchBtn = document.getElementById('search-btn');
  
