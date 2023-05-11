@@ -155,7 +155,7 @@
 			$driver = $_POST['driver'];
 			
 			if (!empty($driver)) {
-				$sql = "SELECT * FROM [dbo].[driver_page_table] WHERE name='$driverName'";
+				$sql = "SELECT * FROM [dbo].[driver_page_table] WHERE name='$driver'";
 				$result = mysqli_query($conn, $sql);
 				
 				if (mysqli_num_rows($result) > 0) {
