@@ -161,9 +161,9 @@
 				echo "<table>";
 				echo "<tr><th>Driver Name</th><th>DOB</th><th>Driver Code</th><th>Nationality</th></tr>";
 
-				while($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-					echo "<tr><td>".$row["driverName"]."</td><td>".$row["dob"]."</td><td>".$row["code"]."</td><td>".$row["nationality"]."</td></tr>";
-				}
+ while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            echo "<tr><td>".$row["driverName"]."</td><td>".$row["dob"]."</td><td>".$row["code"]."</td><td>".$row["nationality"]."</td></tr>";
+        }
 
 				echo "</table>";
 			} else {
