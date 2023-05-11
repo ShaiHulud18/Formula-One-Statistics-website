@@ -142,7 +142,7 @@
 
     // Checks if the connection is established or not
     			if (!$conn) {
-        		die("Connection failed: " . print_r(sqlsrv_errors(), true));
+        		die("Connection failed1: " . print_r(sqlsrv_errors(), true));
     			}
 
     // Query database for circuits
