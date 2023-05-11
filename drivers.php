@@ -116,7 +116,7 @@
     			}
 
     // Query database for circuits
-    			$sql = "SELECT circuitName FROM [dbo].[driver_page_table]";
+    			$sql = "SELECT driverName FROM [dbo].[driver_page_table]";
     			$stmt = sqlsrv_query($conn, $sql);
     			if ($stmt === false) {
         		die(print_r(sqlsrv_errors(), true));
