@@ -153,7 +153,7 @@
 		$driver = $_POST['driver'];
 
 		if (!empty($driver)) {
-			$sql = "SELECT * FROM [dbo].[driver_page_table] WHERE name='$driver'";
+			$sql = "SELECT * FROM [dbo].[driver_page_table] WHERE driverName='$driver'";
 			$result = sqlsrv_query($conn, $sql);
 
 			if (sqlsrv_has_rows($result)) {
