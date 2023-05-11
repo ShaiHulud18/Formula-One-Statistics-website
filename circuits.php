@@ -218,17 +218,6 @@
 }
 sqlsrv_close($conn);
 	?>
-	<script>
-		 searchBtn = document.getElementById('search-btn');
- 
-
-functionToExecute() {
-	searchResults = document.getElementById('search-results');
-  
-  searchResults.style.display = 'block';
-}
-
-	</script>
-</body>
+	</body>
 </html>
                 
