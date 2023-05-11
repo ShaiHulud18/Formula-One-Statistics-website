@@ -120,9 +120,9 @@
 	
 		</header>
 	<nav>
-	<a href="test.html">Home</a>
-		<a href="Drivers.php">Drivers</a>
-		<a href="Teams.php">Teams</a>
+		<a href="index.php">Home</a>
+		<a href="drivers.php">Drivers</a>
+		
 		<a href="circuits.php">Circuits</a>
 	</nav>
 	<form method="POST">
