@@ -154,9 +154,11 @@
 		echo "Selected driver: " . $driver . "<br>";
 		if (!empty($driver)) {
 			$sql = "SELECT * FROM [dbo].[driver_page_table] WHERE driverName='$driver'";
-			echo "Query: " . $sql . "<br>";
+			
 			$result = sqlsrv_query($conn, $sql);
-
+			 while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+        print_r($row);
+    }
 			if (sqlsrv_has_rows($result)) {
 				echo "<table>";
 				echo "<tr><th>Driver Name</th><th>DOB</th><th>Driver Code</th><th>Nationality</th></tr>";
