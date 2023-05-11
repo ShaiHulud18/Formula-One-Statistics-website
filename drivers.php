@@ -99,43 +99,74 @@
 		<label for="driver">Select a driver:</label>
 		<select name="driver" id="driver">
 			<option value="">--Select a driver--</option>
-			<option value="Max Vestappen">Max Vestappen</option>
-			<option value="Sebastian Vettel">Sebastian Vettel</option>
-			<option value="Lewis Hamilton">Lewis Hamilton</option>
+		<?php
+    			$serverName = "f1sqlserver.database.windows.net";
+    			$connectionOptions = array(
+        		"Database" => "f1db",
+        		"Uid" => "ashish",
+        		"PWD" => "Kstc@1234"
+    			);
+
+    // Establishes the connection
+    			$conn = sqlsrv_connect($serverName, $connectionOptions);
+
+    // Checks if the connection is established or not
+    			if (!$conn) {
+        		die("Connection failed1: " . print_r(sqlsrv_errors(), true));
+    			}
+
+    // Query database for circuits
+    			$sql = "SELECT circuitName FROM [dbo].[driver_page_table]";
+    			$stmt = sqlsrv_query($conn, $sql);
+    			if ($stmt === false) {
+        		die(print_r(sqlsrv_errors(), true));
+    			}
+
+    // Loop through results and create options
+    			while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        			echo '<option value="' . $row['driverName'] . '">' . $row['driverName'] . '</option>';
+    			}
+
+    // Close database connection
+    			sqlsrv_free_stmt($stmt);
+    			sqlsrv_close($conn);
+			?>
+			
 		</select>
 		<input type="submit" name="submit" value="Submit">
 	</form>
 	
-	<?php
-		$serverName = "f1sqlserver.database.windows.net";
-		$connectionOptions = array(
-    		"Database" => "f1db",
-    		"Uid" => "ashish",
-   		 "PWD" => "Kstc@1234"
-		);
+	$serverName = "tcp:f1sqlserver.database.windows.net,1433";
+    			$connectionOptions = array(
+        		"Database" => "f1db",
+        			"Uid" => "ashish",
+        			"PWD" => "Kstc@1234"
+    			);
 
-// Establishes the connection
-		$conn = sqlsrv_connect($serverName, $connectionOptions);
+    // Establishes the connection
+    			$conn = sqlsrv_connect($serverName, $connectionOptions);
 
-// Checks if the connection is established or not
-		if (!$conn) {
- 		   die("Connection failed: " . sqlsrv_errors());
-		}
+    // Checks if the connection is established or not
+    			if (!$conn) {
+        		die("Connection failed1: " . print_r(sqlsrv_errors(), true));
+    			}
+
+	
 		
 		
 		if (isset($_POST['submit'])) {
 			$driver = $_POST['driver'];
 			
 			if (!empty($driver)) {
-				$sql = "SELECT * FROM dbo.drivers_page_table WHERE name='$driverName'";
+				$sql = "SELECT * FROM dbo.driver_page_table WHERE name='$driverName'";
 				$result = mysqli_query($conn, $sql);
 				
 				if (mysqli_num_rows($result) > 0) {
 					echo "<table>";
-					echo "<tr><th>Name</th><th>DOB</th><th>Code</th><th>Country</th></tr>";
+					echo "<tr><th>Driver Name</th><th>DOB</th><th>Driver Code</th><th>Nationality</th></tr>";
 					
 					while($row = mysqli_fetch_assoc($result)) {
-						echo "<tr><td>".$row["name"]."</td><td>".$row["dob"]."</td><td>".$row["code"]."</td><td>".$row["country"]."</td></tr>";
+						echo "<tr><td>".$row["driverName"]."</td><td>".$row["dob"]."</td><td>".$row["code"]."</td><td>".$row["nationality"]."</td></tr>";
 					}
 					
 					echo "</table>";
