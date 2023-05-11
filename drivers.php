@@ -151,7 +151,7 @@
 
 	if (isset($_POST['submit'])) {
 		$driver = $_POST['driver'];
-
+		echo $driver ;
 		if (!empty($driver)) {
 			$sql = "SELECT * FROM [dbo].[driver_page_table] WHERE driverName='$driver'";
 			$result = sqlsrv_query($conn, $sql);
