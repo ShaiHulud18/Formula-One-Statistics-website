@@ -143,16 +143,10 @@
         			"PWD" => "Kstc@1234"
     			);
 
-    // Establishes the connection
     			$conn = sqlsrv_connect($serverName, $connectionOptions);
-
-    // Checks if the connection is established or not
     			if (!$conn) {
         		die("Connection failed1: " . print_r(sqlsrv_errors(), true));
     			}
-
-	
-		
 		
 		if (isset($_POST['submit'])) {
 			$driver = $_POST['driver'];
