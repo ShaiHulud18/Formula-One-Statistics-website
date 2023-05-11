@@ -136,23 +136,26 @@
 		<input type="submit" name="submit" value="Submit">
 	</form>
 	<?php
-	$serverName = "tcp:f1sqlserver.database.windows.net,1433";
+	$serverName = "f1sqlserver.database.windows.net";
     			$connectionOptions = array(
         		"Database" => "f1db",
-        			"Uid" => "ashish",
-        			"PWD" => "Kstc@1234"
+        		"Uid" => "ashish",
+        		"PWD" => "Kstc@1234"
     			);
 
     			$conn = sqlsrv_connect($serverName, $connectionOptions);
+
+   
     			if (!$conn) {
         		die("Connection failed1: " . print_r(sqlsrv_errors(), true));
     			}
+
 		
 		if (isset($_POST['submit'])) {
 			$driver = $_POST['driver'];
 			
 			if (!empty($driver)) {
-				$sql = "SELECT * FROM dbo.driver_page_table WHERE name='$driverName'";
+				$sql = "SELECT * FROM [dbo].[driver_page_table] WHERE name='$driverName'";
 				$result = mysqli_query($conn, $sql);
 				
 				if (mysqli_num_rows($result) > 0) {
