@@ -129,35 +129,39 @@
 		<label for="circuits">Select a Circuit:</label>
 		<select name="circuits" id="circuits">
 			<option value="">-- Select a Circuit --</option>
-			<?php
-			$serverName = "f1sqlserver.database.windows.net";
-			$connectionOptions = array(
-    			"Database" => "f1db",
-    			"Uid" => "ashish",
-    			"PWD" => "Kstc@1234"
-			);
+		<?php
+    			$serverName = "f1sqlserver.database.windows.net";
+    			$connectionOptions = array(
+        		"Database" => "f1db",
+        		"UID" => "ashish",
+        		"PWD" => "Kstc@1234"
+    			);
 
-// Establishes the connection
-			$conn = sqlsrv_connect($serverName, $connectionOptions);
+    // Establishes the connection
+    			$conn = sqlsrv_connect($serverName, $connectionOptions);
 
-// Checks if the connection is established or not
-			if (!$conn) {
-   			 die("Connection failed: " . sqlsrv_errors());
-			}
-			
+    // Checks if the connection is established or not
+    			if (!$conn) {
+        		die("Connection failed: " . print_r(sqlsrv_errors(), true));
+    			}
 
-            // Query database for circuits
-            		$sql = "SELECT circuitName FROM [dbo].[circuit_page_table]";
-           		 $result = mysqli_query($conn, $sql);
+    // Query database for circuits
+    			$sql = "SELECT circuitName FROM [dbo].[circuit_page_table]";
+    			$stmt = sqlsrv_query($conn, $sql);
+    			if ($stmt === false) {
+        		die(print_r(sqlsrv_errors(), true));
+    			}
 
-            // Loop through results and create options
-            		while ($row = mysqli_fetch_assoc($result)) {
-                	echo '<option value="' . $row['circuitName'] . '">' . $row['circuitName'] . '</option>';
-            		}
+    // Loop through results and create options
+    			while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        			echo '<option value="' . $row['circuitName'] . '">' . $row['circuitName'] . '</option>';
+    			}
 
-            // Close database connection
-            	mysqli_close($conn);
-        	?>
+    // Close database connection
+    			sqlsrv_free_stmt($stmt);
+    			sqlsrv_close($conn);
+			?>
+
 			
 		</select>
 		<input type="submit" name="search" value="Search">
