@@ -107,18 +107,20 @@
 	</form>
 	
 	<?php
-		
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "db";
-		
-		$conn = mysqli_connect($servername, $username, $password, $dbname);
-		
-		
-		if (!$conn) {
-			die("Connection failed: " . mysqli_connect_error());
-		}
+$serverName = "f1sqlserver.database.windows.net";
+$connectionOptions = array(
+    "Database" => "f1db",
+    "Uid" => "ashish",
+    "PWD" => "Kstc@1234"
+);
+
+// Establishes the connection
+$conn = sqlsrv_connect($serverName, $connectionOptions);
+
+// Checks if the connection is established or not
+if (!$conn) {
+    die("Connection failed: " . sqlsrv_errors());
+}
 		
 		
 		if (isset($_POST['submit'])) {
