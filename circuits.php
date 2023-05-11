@@ -167,25 +167,20 @@
 		<input type="submit" name="search" value="Search">
 	</form>
 	<?php
-		$serverName = "tcp:f1sqlserver.database.windows.net,1433";
-		$connectionOptions = array(
-    		"Database" => "f1db",
-    		"UID" => "ashish",
-    		"PWD" => "Kstc@1234",
-    		"MultipleActiveResultSets" => false,
-    		"Encrypt" => true,
-    		"TrustServerCertificate" => false,
-    		"ConnectionPooling" => true,
-    		"Driver" => "sqlsrv"
-);
+	$serverName = "tcp:f1sqlserver.database.windows.net,1433";
+    			$connectionOptions = array(
+        		"Database" => "f1db",
+        			"Uid" => "ashish",
+        			"PWD" => "Kstc@1234"
+    			);
 
-// Establishes the connection
-		$conn = sqlsrv_connect($serverName, $connectionOptions);
+    // Establishes the connection
+    			$conn = sqlsrv_connect($serverName, $connectionOptions);
 
-// Checks if the connection is established or not
-		if (!$conn) {
-   		 die("Connection2 failed: " . sqlsrv_errors());
-		}
+    // Checks if the connection is established or not
+    			if (!$conn) {
+        		die("Connection failed1: " . print_r(sqlsrv_errors(), true));
+    			}
 
 	
 	if (isset($_POST['search'])) {
