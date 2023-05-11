@@ -135,7 +135,7 @@
 		</select>
 		<input type="submit" name="submit" value="Submit">
 	</form>
-	
+	<?php
 	$serverName = "tcp:f1sqlserver.database.windows.net,1433";
     			$connectionOptions = array(
         		"Database" => "f1db",
