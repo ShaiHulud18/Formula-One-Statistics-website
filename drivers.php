@@ -136,48 +136,47 @@
 		<input type="submit" name="submit" value="Submit">
 	</form>
 	<?php
-	$serverName = "f1sqlserver.database.windows.net";
-	$connectionOptions = array(
-		"Database" => "f1db",
-		"Uid" => "ashish",
-		"PWD" => "Kstc@1234"
-	);
+    			$serverName = "f1sqlserver.database.windows.net";
+    			$connectionOptions = array(
+        		"Database" => "f1db",
+        		"Uid" => "ashish",
+        		"PWD" => "Kstc@1234"
+    			);
 
-	$conn = sqlsrv_connect($serverName, $connectionOptions);
+    // Establishes the connection
+    			$conn = sqlsrv_connect($serverName, $connectionOptions);
 
-	if (!$conn) {
-		die("Connection failed1: " . print_r(sqlsrv_errors(), true));
-	}
+    // Checks if the connection is established or not
+    			if (!$conn) {
+        		die("Connection failed1: " . print_r(sqlsrv_errors(), true));
+    			}
+	
+	if (isset($_POST['search'])) {
+    $driver = $_POST['driver'];
+    $query = "SELECT * FROM [dbo].[driver_page_table] WHERE driverName='$driver'";
+    $result = sqlsrv_query($conn, $query);
+    if ($result === false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
 
-	if (isset($_POST['submit'])) {
-		$driver = $_POST['driver'];
-		echo "Selected driver: " . $driver . "<br>";
-		if (!empty($driver)) {
-			$sql = "SELECT * FROM [dbo].[driver_page_table] WHERE driverName='$driver'";
-			
-			$result = sqlsrv_query($conn, $sql);
-			
-			if (sqlsrv_has_rows($result)) {
-				echo "<table>";
-				echo "<tr><th>Driver Name</th><th>DOB</th><th>Driver Code</th><th>Nationality</th></tr>";
-
- while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            echo "<tr><td>".$row["driverName"]."</td><td>".$row["dob"]."</td><td>".$row["code"]."</td><td>".$row["nationality"]."</td></tr>";
+    if (sqlsrv_has_rows($result)) {
+        echo '<table>';
+        echo '<tr><th>driver Name</th></tr>';
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            echo '<tr>';
+            echo '<td>' . $row['driverName'] . '</td>';
+            
+            echo '</tr>';
         }
+        echo '</table>';
+    } else {
+        echo 'No driver found.';
+    }
 
-				echo "</table>";
-			} else {
-				echo "No driver details found for ".$driver;
-			}
-		} else {
-			echo "Please select a driver";
-		}
-	}
-
-	sqlsrv_free_stmt($result);
-	sqlsrv_close($conn);
-?>
-
+    sqlsrv_free_stmt($result);
+}
+sqlsrv_close($conn);
+	?>
 	
 </body>
 </html>
