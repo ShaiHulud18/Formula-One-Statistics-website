@@ -147,7 +147,7 @@
 			
 
             // Query database for circuits
-            		$sql = "SELECT circuitName FROM dbo.circuit_page_table";
+            		$sql = "SELECT circuitName FROM [dbo].[circuit_page_table]";
            		 $result = mysqli_query($conn, $sql);
 
             // Loop through results and create options
