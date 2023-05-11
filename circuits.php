@@ -167,12 +167,17 @@
 		<input type="submit" name="search" value="Search">
 	</form>
 	<?php
-		$serverName = "f1sqlserver.database.windows.net";
+		$serverName = "tcp:f1sqlserver.database.windows.net,1433";
 		$connectionOptions = array(
     		"Database" => "f1db",
-    		"Uid" => "ashish",
-    		"PWD" => "Kstc@1234"
-		);
+    		"UID" => "ashish",
+    		"PWD" => "Kstc@1234",
+    		"MultipleActiveResultSets" => false,
+    		"Encrypt" => true,
+    		"TrustServerCertificate" => false,
+    		"ConnectionPooling" => true,
+    		"Driver" => "sqlsrv"
+);
 
 // Establishes the connection
 		$conn = sqlsrv_connect($serverName, $connectionOptions);
