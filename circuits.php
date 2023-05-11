@@ -185,7 +185,7 @@
 	
 	if (isset($_POST['search'])) {
     $circuit = $_POST['circuits'];
-    $query = "SELECT * FROM [dbo].[circuit_page_table] WHERE name='$circuitName'";
+    $query = "SELECT * FROM [dbo].[circuit_page_table] WHERE circuitName='$circuit'";
     $result = sqlsrv_query($conn, $query);
     if ($result === false) {
         die(print_r(sqlsrv_errors(), true));
