@@ -133,7 +133,7 @@
     			$serverName = "f1sqlserver.database.windows.net";
     			$connectionOptions = array(
         		"Database" => "f1db",
-        		"UID" => "ashish",
+        		"Uid" => "ashish",
         		"PWD" => "Kstc@1234"
     			);
 
