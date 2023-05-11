@@ -184,7 +184,7 @@
 
 // Checks if the connection is established or not
 		if (!$conn) {
-   		 die("Connection failed: " . sqlsrv_errors());
+   		 die("Connection2 failed: " . sqlsrv_errors());
 		}
 
 	
