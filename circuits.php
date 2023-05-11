@@ -137,32 +137,38 @@
 		<input type="submit" name="search" value="Search">
 	</form>
 	<?php
-	
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "db";
-	
-	$conn = mysqli_connect($servername, $username, $password, $dbname);
-	
-	
-	if (!$conn) {
-		die("Connection failed: " . mysqli_connect_error());
-	}
+		$serverName = "f1sqlserver.database.windows.net";
+		$connectionOptions = array(
+    		"Database" => "f1db",
+    		"Uid" => "ashish",
+    		"PWD" => "Kstc@1234"
+		);
+
+// Establishes the connection
+		$conn = sqlsrv_connect($serverName, $connectionOptions);
+
+// Checks if the connection is established or not
+		if (!$conn) {
+   		 die("Connection failed: " . sqlsrv_errors());
+		}
+
 	
 	if (isset($_POST['search'])) {
 		$circuit = $_POST['circuits'];
-		$query = "SELECT * FROM circuits WHERE name='$circuit'";
+		$query = "SELECT * FROM dbo.circuits_page_table WHERE name='$circuitName'";
 		$result = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($result) > 0) {
 			echo '<table>';
-			echo '<tr><th>Circuit Name</th><th>Location</th><th>Fastest Lap</th></tr>';
+			echo '<tr><th>Circuit Name</th><th>Location</th><th>Country</th><th>Fastest Lap</th><th>Driver Name</th><th>Race Year</th></tr>';
 			while ($row = mysqli_fetch_assoc($result)) {
 				echo '<tr>';
-				echo '<td>' . $row['name'] . '</td>';
+				echo '<td>' . $row['circuitName'] . '</td>';
 				echo '<td>' . $row['location'] . '</td>';
-				echo '<td>' . $row['fastest lap'] . '</td>';
+				echo '<td>' . $row['country'] . '</td>';
+				echo '<td>' . $row['time'] . '</td>';
+				echo '<td>' . $row['driverName'] . '</td>';
+				echo '<td>' . $row['raceYear'] . '</td>';
 				echo '</tr>';
 			}
 			echo '</table>';
