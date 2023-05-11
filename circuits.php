@@ -167,11 +167,11 @@
 		<input type="submit" name="search" value="Search">
 	</form>
 	<?php
-	$serverName = "tcp:f1sqlserver.database.windows.net,1433";
+    			$serverName = "f1sqlserver.database.windows.net";
     			$connectionOptions = array(
         		"Database" => "f1db",
-        			"Uid" => "ashish",
-        			"PWD" => "Kstc@1234"
+        		"Uid" => "ashish",
+        		"PWD" => "Kstc@1234"
     			);
 
     // Establishes the connection
@@ -181,7 +181,6 @@
     			if (!$conn) {
         		die("Connection failed1: " . print_r(sqlsrv_errors(), true));
     			}
-
 	
 	if (isset($_POST['search'])) {
     $circuitName = $_POST['circuits'];
