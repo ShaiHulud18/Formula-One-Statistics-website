@@ -172,7 +172,7 @@ if (sqlsrv_has_rows($result)) {
 	     echo '<td>' . $row['code'] . '</td>';
 	     //echo '<td>' . $row['dob'] . '</td>';
 	     echo '<td>' . $row['nationality'] . '</td>';
-	     echo '<td>' . '<a href="' . $row['driverurl'] . '">'.$row['driverurl'] . '</a>'.'</td>';
+	     echo '<td>' . '<a href="' . $row['driverurl'] . '" target="_blank">'.$row['driverurl'] . '</a>'.'</td>';
         // add additional columns here if required
 	   
         echo '</tr>';
