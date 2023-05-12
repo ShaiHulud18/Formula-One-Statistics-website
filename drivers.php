@@ -163,7 +163,7 @@ if (isset($_POST['submit'])) {
     }
 if (sqlsrv_has_rows($result)) {
     echo '<table>';
-    echo '<tr><th>Driver Name</th><th>Driver Id</th><th>Code</th><th>Nationality</th></tr>';
+    echo '<tr><th>Driver Name</th><th>Driver Id</th><th>Code</th><th>Nationality</th><th>url</th></tr>';
 
     while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
         echo '<tr>';
@@ -172,7 +172,7 @@ if (sqlsrv_has_rows($result)) {
 	     echo '<td>' . $row['code'] . '</td>';
 	     //echo '<td>' . $row['dob'] . '</td>';
 	     echo '<td>' . $row['nationality'] . '</td>';
-	     //echo '<td>' . $row['driverurl'] . '</td>';
+	     echo '<td>' . $row['driverurl'] . '</td>';
         // add additional columns here if required
         echo '</tr>';
     }
