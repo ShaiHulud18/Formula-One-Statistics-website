@@ -153,6 +153,7 @@ if (!$conn) {
 }
 
 if (isset($_POST['search'])) {
+	echo $driver;
     $driver = $_POST['driver'];
     $query = "SELECT * FROM [dbo].[driver_page_table] WHERE driverName='$driver'";
     $result = sqlsrv_query($conn, $query);
