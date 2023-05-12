@@ -170,9 +170,9 @@ if (sqlsrv_has_rows($result)) {
         echo '<td>' . $row['driverName'] . '</td>';
 	 echo '<td>' . $row['driverId'] . '</td>';
 	     echo '<td>' . $row['code'] . '</td>';
-	     echo '<td>' . $row['dob'] . '</td>';
+	     //echo '<td>' . $row['dob'] . '</td>';
 	     echo '<td>' . $row['nationality'] . '</td>';
-	     echo '<td>' . $row['driverurl'] . '</td>';
+	     //echo '<td>' . $row['driverurl'] . '</td>';
         // add additional columns here if required
         echo '</tr>';
     }
