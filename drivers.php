@@ -153,7 +153,7 @@ if (!$conn) {
 }
 
 if (isset($_POST['submit'])) {
-    echo $driver;
+    
     $driver = $_POST['driver'];
     $query = "SELECT * FROM [dbo].[driver_page_table] WHERE driverName='$driver'";
     $result = sqlsrv_query($conn, $query);
@@ -163,18 +163,23 @@ if (isset($_POST['submit'])) {
     }
 if (sqlsrv_has_rows($result)) {
     echo '<table>';
-    echo '<tr><th>Driver Name</th></tr>';
+    echo '<tr><th>Driver Name</th><th>Driver Id</th><th>Code</th><th>DOB</th><th>Nationality</th><th>Driver URL</th></tr>';
 
     while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
         echo '<tr>';
         echo '<td>' . $row['driverName'] . '</td>';
+	 echo '<td>' . $row['driverId'] . '</td>';
+	     echo '<td>' . $row['code'] . '</td>';
+	     echo '<td>' . $row['dob'] . '</td>';
+	     echo '<td>' . $row['nationality'] . '</td>';
+	     echo '<td>' . $row['driverurl'] . '</td>';
         // add additional columns here if required
         echo '</tr>';
     }
 
     echo '</table>';
     
-	echo $driver;
+	
 } else {
     echo 'No driver found.';
 }
