@@ -201,7 +201,7 @@
             echo '<td>' . $row['time'] . '</td>';
             echo '<td>' . $row['driverName'] . '</td>';
             echo '<td>' . $row['raceYear'] . '</td>';
-            echo '<td>' . '<a href="' . $row['circuiturl'] . '">'.$row['circuiturl'] . '</a>'.'</td>';
+            echo '<td>' . '<a href="' . $row['circuiturl'] . '" target="_blank">'.$row['circuiturl'] . '</a>'.'</td>';
             echo '</tr>';
         }
         echo '</table>';
