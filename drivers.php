@@ -136,7 +136,7 @@
 		</select>
 		<input type="submit" name="submit" value="Submit">
 	</form>
-	<?php
+	<center><?php
 $serverName = "f1sqlserver.database.windows.net";
 $connectionOptions = array(
     "Database" => "f1db",
@@ -172,8 +172,9 @@ if (sqlsrv_has_rows($result)) {
 	     echo '<td>' . $row['code'] . '</td>';
 	     //echo '<td>' . $row['dob'] . '</td>';
 	     echo '<td>' . $row['nationality'] . '</td>';
-	     echo '<td>' . $row['driverurl'] . '</td>';
+	     echo '<td>' . '<a href="' . $row['driverurl'] . '">'.$row['driverurl'] . '</a>'.'</td>';
         // add additional columns here if required
+	   
         echo '</tr>';
     }
 
@@ -187,7 +188,7 @@ if (sqlsrv_has_rows($result)) {
 }
 
 sqlsrv_close($conn);
-?>
+		?></center>
 
 	
 </body>
