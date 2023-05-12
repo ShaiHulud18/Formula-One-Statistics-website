@@ -152,8 +152,8 @@ if (!$conn) {
     die("Connection failed: " . print_r(sqlsrv_errors(), true));
 }
 
-if (isset($_POST['search'])) {
-	echo $driver;
+if (isset($_POST['submit'])) {
+    echo $driver;
     $driver = $_POST['driver'];
     $query = "SELECT * FROM [dbo].[driver_page_table] WHERE driverName='$driver'";
     $result = sqlsrv_query($conn, $query);
@@ -162,7 +162,7 @@ if (isset($_POST['search'])) {
         die("Query failed: " . print_r(sqlsrv_errors(), true));
     }
 if (sqlsrv_has_rows($result)) {
-    /*echo '<table>';
+    echo '<table>';
     echo '<tr><th>Driver Name</th></tr>';
 
     while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
@@ -173,7 +173,7 @@ if (sqlsrv_has_rows($result)) {
     }
 
     echo '</table>';
-    */
+    
 	echo $driver;
 } else {
     echo 'No driver found.';
