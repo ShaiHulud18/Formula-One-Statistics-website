@@ -166,7 +166,7 @@
 		</select>
 		<input type="submit" name="search" value="Search">
 	</form>
-	<?php
+	<center><?php
     			$serverName = "f1sqlserver.database.windows.net";
     			$connectionOptions = array(
         		"Database" => "f1db",
@@ -192,7 +192,7 @@
 
     if (sqlsrv_has_rows($result)) {
         echo '<table>';
-        echo '<tr><th>Circuit Name</th><th>Location</th><th>Country</th><th>Fastest Lap</th><th>Driver Name</th><th>Race Year</th></tr>';
+        echo '<tr><th>Circuit Name</th><th>Location</th><th>Country</th><th>Fastest Lap</th><th>Driver Name</th><th>Race Year</th><th>Circuit URL</th></tr>';
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             echo '<tr>';
             echo '<td>' . $row['circuitName'] . '</td>';
@@ -201,6 +201,7 @@
             echo '<td>' . $row['time'] . '</td>';
             echo '<td>' . $row['driverName'] . '</td>';
             echo '<td>' . $row['raceYear'] . '</td>';
+            echo '<td>' . '<a href="' . $row['circuiturl'] . '">'.$row['circuiturl'] . '</a>'.'</td>';
             echo '</tr>';
         }
         echo '</table>';
@@ -211,7 +212,7 @@
     sqlsrv_free_stmt($result);
 }
 sqlsrv_close($conn);
-	?>
+		?></center>
 	</body>
 </html>
                 
