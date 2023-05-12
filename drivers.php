@@ -160,22 +160,21 @@ if (isset($_POST['search'])) {
     if ($result === false) {
         die("Query failed: " . print_r(sqlsrv_errors(), true));
     }
+if (sqlsrv_has_rows($result)) {
+    echo '<table>';
+    echo '<tr><th>Driver Name</th></tr>';
 
-    if (sqlsrv_has_rows($result)) {
-        echo '<table>';
-        echo '<tr><th>driver Name</th></tr>';
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            echo '<tr>';
-            echo '<td>' . $row['driverName'] . '</td>';
-            echo '</tr>';
-        }
-
-        echo '</table>';
-    } else {
-        echo 'No driver found.';
+    while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+        echo '<tr>';
+        echo '<td>' . $row['driverName'] . '</td>';
+        // add additional columns here if required
+        echo '</tr>';
     }
 
+    echo '</table>';
+} else {
+    echo 'No driver found.';
+}
     sqlsrv_free_stmt($result);
 }
 
