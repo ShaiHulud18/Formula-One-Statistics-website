@@ -68,7 +68,7 @@
 			border-radius: 5px;
 		}
 		h2 {
-			margin-top: 0;
+			margin-top: 1;
 		}
 		.search-container {
 			display: flex;
