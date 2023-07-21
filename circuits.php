@@ -11,8 +11,8 @@
 		}
 		body {
 			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
+			margin: 1;
+			padding: 1;
 		}
 		header {
 			font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
